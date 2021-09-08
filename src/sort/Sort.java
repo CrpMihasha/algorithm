@@ -7,9 +7,15 @@ package sort;
 public class Sort {
     public static void main(String[] args) {
         int[] arr = {2,1,6,7,4,8,0};
-        SortUtil.printArr(arr);
         insertionSort(arr);
-        SortUtil.printArr(arr);
+        validateCode(arr);
+    }
+
+    public static void validateCode(int[] arr) {
+        if (!SortUtil.isSorted(arr)) {
+            System.out.println("排序算法出错了");
+            SortUtil.printArrInLine(arr);
+        }
     }
 
     /**
