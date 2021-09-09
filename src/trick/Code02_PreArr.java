@@ -1,7 +1,7 @@
 package trick;
 
 /**
- * 
+ *
  * @Author Seth
  * @Date 2021/9/8
  */
