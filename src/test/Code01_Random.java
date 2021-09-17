@@ -1,4 +1,4 @@
-package trick;
+package test;
 
 import sort.SortUtil;
 

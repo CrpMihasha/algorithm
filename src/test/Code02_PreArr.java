@@ -1,4 +1,4 @@
-package trick;
+package test;
 
 /**
  *
