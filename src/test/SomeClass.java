@@ -43,6 +43,7 @@ public class SomeClass {
                     while (++souceBytesIndex < souceBytes.length && ++strBytesIndex < strBytes.length) {
                         if (souceBytes[souceBytesIndex] != strBytes[strBytesIndex]) {
                             isBreak = true;
+                            ans = -1;
                             break;
                         }
                     }
@@ -60,8 +61,8 @@ public class SomeClass {
     }
  
     public static void main(String[] args) {
-        System.out.println("abcabdabdabdef".indexOf("abd"));
-        System.out.println(indexOf("abcabdabdabdef", "abd"));
+        System.out.println("abcabdabdabdef".indexOf("abcd"));
+        System.out.println(indexOf("abcabdabdabdef", "abcd"));
         if (indexOf("abcabdef", "abd") != "abcabdef".indexOf("abd")) {
             System.out.println("Oops!");
         }
