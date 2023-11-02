@@ -59,15 +59,15 @@ public class SortUtil {
      * @param maxValue 指定数组最大值
      * @return 长度随机值随机的数组
      */
-    public static int[] lenRandomValueRandom(int maxLen, int maxValue) throws Exception {
+    public static int[] lenRandomValueRandom(int maxLen, int maxValue){
         // 边界处理
         if (maxLen <= 0) {
             System.out.println("maxLen必须为非0的正整数");
-            throw new Exception();
+            throw new RuntimeException();
         }
         if (maxValue <=0) {
             System.out.println("maxValue必须为非0的正整数");
-            throw new Exception();
+            throw new RuntimeException();
         }
 
         int len = (int)(Math.random() * maxLen );
