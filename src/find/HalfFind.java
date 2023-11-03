@@ -10,12 +10,12 @@ import sort.SortUtil;
 public class HalfFind {
     public static void main(String[] args) throws Exception{
         int testTimes = 100000;
+        int[] arr1 = {1 ,3, 3, 3, 4, 4, 5, 5 };
         for (int i = 0; i < testTimes; i++) {
             int[] arr = SortUtil.lenRandomValueRandom(10, 6);
             Sort.bubbleSort(arr);
-            int idx = find(arr, 5);
-            int validate = validateFindMostLeftNum(arr, 5);
-            int mostLeftNum = findMostLeftNum(arr, 5);
+            int validate = validateFindMostLeftNum(arr1, 5);
+            int mostLeftNum = findMostLeftNum(arr1, 5);
             if (validate != mostLeftNum) {
                 System.out.println("validate = " + validate);
                 System.out.println("mostLeftNum = " + mostLeftNum);
@@ -24,9 +24,31 @@ public class HalfFind {
                 break;
             }
         }
-//        int[] arr = {1 ,3, 3, 3, 4, 4, 5, 5 };
+
 //        System.out.println(findMostLeftNum(arr, 5));
 //        System.out.println(validateFindMostLeftNum(arr, 5));
+    }
+
+    public static int findFirstLeftIndex(int[] arr, int target){
+        if (arr == null) {
+            return -1;
+        }
+        if (arr.length == 1) {
+            return arr[0] == target ? 0 : -1;
+        }
+        int L = 0, R = arr.length-1,mid,resultIndex = -1;
+        while (L < R) {
+            mid = L + (R-L) >> 1;
+            if (arr[mid] > target) {
+                R = mid - 1;
+            } else if (arr[mid] == target) {
+                resultIndex = mid;
+                R = mid - 1;
+            } else {
+                L = mid + 1;
+            }
+        }
+        return resultIndex;
     }
 
     /**
