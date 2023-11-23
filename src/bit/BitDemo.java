@@ -1,8 +1,13 @@
 package bit;
 
 
+import sort.SortUtil;
+
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 位运算特性：可以理解成无进位加法
@@ -12,15 +17,7 @@ import java.util.HashSet;
 public class BitDemo {
 
     public static void main(String[] args) {
-        int[] arr = {1,1,2,2,4,5,6,5,6};
-//        findRightOne(14);
-        Integer num1 = -1;
-        Integer num2 = 1;
-        System.out.println(Integer.toBinaryString(num1));
-        System.out.println(Integer.toBinaryString(~num1));
-        System.out.println(Integer.toBinaryString(num2));
-        System.out.println(Integer.toBinaryString(~num2));
-        System.out.println(Integer.toBinaryString(0));
+        test(100);
     }
 
     /**
@@ -106,7 +103,7 @@ public class BitDemo {
         HashMap<Integer, Integer> map = new HashMap(arr.length);
         for (int i = 0; i < arr.length; i++) {
             Integer value = map.get(arr[i]);
-            map.put(arr[i], value == null ? 0 : value+1);
+            map.put(arr[i], value == null ? 1 : value+1);
         }
 
         for (Integer integer : map.keySet()) {
@@ -119,10 +116,42 @@ public class BitDemo {
     }
 
     /**
-     *
+     * k < m && m > 0
      * @param size 生成一个size大小的数组
      * @param range 元素范围在(-range, range)
      */
-    public static int[] generateIntArr(int size, int range){}
+    public static int[] generateIntArr(int size, int range, int k, int m){
+        int[] result = new int[size];
+        Integer kTimesNumber = null,mTimesNumber = null;
 
+        kTimesNumber = (int) (Math.random() * range) - (int) (Math.random() * range);
+        for (int i = 0; i < k; i++) {
+            result[i] = kTimesNumber;
+        }
+
+        while (!(mTimesNumber = (int) (Math.random() * range) - (int) (Math.random() * range)).equals(kTimesNumber)){
+            for (int i = k; i < size; i++) {
+                result[i] = mTimesNumber;
+            }
+        }
+        return result;
+    }
+
+    public static void test(int loopcount) {
+        int arrSize = 50;
+        int range = 100;
+        int k = 3, m = 17;
+        for (int i = 0; i < loopcount; i++) {
+            int[] ints = generateIntArr(arrSize, range, k, m);
+            SortUtil.printArrInLine(ints);
+            int validater1 = validater(ints, k, m);
+            int kTimesInteger = findKTimesInteger(ints, k, m);
+            if (validater1 != kTimesInteger) {
+                System.out.println("validater1 = " + validater1);
+                System.out.println("kTimesInteger = " + kTimesInteger);
+                System.out.println("Something is wrong!");
+            }
+        }
+        System.out.println("Everything is alright");
+    }
 }
