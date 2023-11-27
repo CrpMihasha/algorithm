@@ -1,14 +1,14 @@
 package link;
 
+import java.util.ArrayList;
+
 public class NodeUtil {
     public static void main(String[] args) {
-        Node node = generateIntegerNode(3, 10);
-        System.out.print("before: ");
-        printLink(node);
-        Node newHead = reverseLink(node);
-        System.out.println();
-        System.out.print("after: ");
-        printLink(newHead);
+//        Node node = generateIntegerNode(5, 10);
+//        printLink(node);
+//        printLink(reverseLinkedList(node));
+
+        testReverseLink(10);
     }
 
     /**
@@ -33,6 +33,82 @@ public class NodeUtil {
             }
         }
         return head;
+    }
+
+    /**
+     * 測試鏈表反轉
+     */
+    public static void testReverseLink(int testCount){
+        for (int i = 0; i < testCount; i++) {
+            Node node = generateIntegerNode(10, 50);
+            Node node2 = reverseSimple(node);
+            Node node1 = reverseLink(node);
+            if (node1.equals(node2)) {
+                System.out.println("Nice");
+            } else {
+                System.out.println("Fuck wrong!");
+            }
+        }
+    }
+
+    /**
+     * gpt給的算法
+     * @param node
+     * @return
+     */
+    public static Node reverseLinkedList(Node node) {
+        Node prev = null;
+        Node current = node;
+        Node next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+
+    /**
+     * gpt給的，會修改入參
+     */
+    public static Node reverseLinkFromChatGpt(Node node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+        Node reversedHead = reverseLinkFromChatGpt(node.next);
+        node.next.next = node;
+        node.next = null;
+
+        return reversedHead;
+    }
+
+    public static Node reverseSimple(Node head){
+        ArrayList<Object> nodeList = new ArrayList<>();
+        while (head != null) {
+            nodeList.add(head.value);
+            head = head.next;
+        }
+        int size = nodeList.size();
+
+        Node newHead = null;
+        Node currentHead = null;
+        for (int i = size - 1; i >= 0; i--) {
+            if (i == size - 1) {
+                newHead = new Node();
+                newHead.value = nodeList.get(i);
+                newHead.next = new Node();
+                currentHead = newHead.next;
+            } else {
+                currentHead.value = nodeList.get(i);
+                if (i != 0) {
+                    currentHead.next = new Node();
+                    currentHead = currentHead.next;
+                }
+            }
+        }
+        return newHead;
     }
     /**
      * 反转链表
@@ -73,5 +149,9 @@ public class NodeUtil {
           System.out.print(head.value + " ");
           head = head.next;
       }
+
+      System.out.println();
     }
+
+
 }
