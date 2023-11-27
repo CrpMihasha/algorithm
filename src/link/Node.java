@@ -7,4 +7,12 @@ package link;
 public class Node<T> {
     public T value;
     public Node<T> next;
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "value=" + value +
+                ", next=" + next +
+                '}';
+    }
 }
