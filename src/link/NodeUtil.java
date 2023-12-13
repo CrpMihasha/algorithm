@@ -8,7 +8,36 @@ public class NodeUtil {
 //        printLink(node);
 //        printLink(reverseLinkedList(node));
 
-        testReverseLink(10);
+        Node node = generateSortedIntegerNode(10);
+        printLink(node);
+    }
+
+    /**
+     * 给出一个节点N，左节点left，有节点right， left < right,反转 left -> right
+     */
+
+    /**
+     * 生成一个顺序链表
+     *
+     * @param size 链表大小
+     * @param range 元素范围[0,range]
+     */
+    public static Node generateSortedIntegerNode(Integer range) {
+        Node head = null;
+        Node currentHead = null;
+        for (int i = 0; i <= range; i++) {
+            Node node = new Node();
+            node.value = i;
+            if (i == 0) {
+                currentHead = node;
+                head = node;
+            } else {
+                // 此处从第二个节点开始
+                currentHead.next = node;
+                currentHead = currentHead.next;
+            }
+        }
+        return head;
     }
 
     /**
