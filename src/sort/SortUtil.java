@@ -6,6 +6,21 @@ package sort;
  */
 public class SortUtil {
     /**
+     * 验证方法
+     */
+    public static void sortTest(int loopCount) {
+        for (int i = 0; i < loopCount; i++) {
+            int[] arr = lenRandomValueRandom(20, 100);
+            Sort.quickSort(arr, 0, arr.length - 1);
+            if (!isSorted(arr)) {
+                printArrInLine(arr);
+                System.out.println("出错了");
+                return;
+            }
+        }
+    }
+
+    /**
      * 验证一个给定的数组是否为升序排列
      *
      * @param arr int数组

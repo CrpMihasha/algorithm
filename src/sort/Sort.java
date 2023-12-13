@@ -1,14 +1,36 @@
 package sort;
 
+import static sort.SortUtil.swap;
+
 /**
  * @Author Seth
  * @Date 2021/9/7
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = {2,1,6,7,4,8,0};
-        insertionSort(arr);
-        validateCode(arr);
+        SortUtil.sortTest(100);
+    }
+
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quickSort(arr,0, pivotIndex - 1);
+            quickSort(arr,pivotIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return i + 1;
     }
 
     public static void validateCode(int[] arr) {
@@ -48,7 +70,7 @@ public class Sort {
 
         for (int i = 0; i < N; i++) {
             for (int j = i; j - 1 >= 0 && arr[j] < arr[j-1]; j--) {
-                SortUtil.swap(arr, j, j - 1);
+                swap(arr, j, j - 1);
             }
         }
     }
@@ -77,7 +99,7 @@ public class Sort {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    SortUtil.swap(arr, j, j + 1);
+                    swap(arr, j, j + 1);
                 }
             }
         }
@@ -113,7 +135,7 @@ public class Sort {
                     minValueIndex = j;
                 }
             }
-            SortUtil.swap(arr, i, minValueIndex);
+            swap(arr, i, minValueIndex);
         }
 
     }
