@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.link;
 
 import java.util.Objects;
 
@@ -37,24 +37,20 @@ import java.util.Objects;
  */
 public class A2697 {
     public String makeSmallestPalindrome(String s) {
-        int length = s.length();
-        if (Objects.isNull(s) || length < 1 || length > 1000) {
-            throw new UnsupportedOperationException("");
-        }
-        char[] charArray = s.toCharArray();
-        int low = 0, high = length - 1;
-        while (low < high) {
-            char lowChar = charArray[low];
-            char highChar = charArray[high];
-            if (lowChar < highChar) {
-                charArray[high] = lowChar;
-            } else if (lowChar > highChar) {
-                charArray[low] = highChar;
-            }
-            low++;
-            high--;
+        int n = s.length();
+        if (n == 1) {
+            return s;
         }
 
+        char[] charArray = s.toCharArray();
+        for(int i = 0; i < n / 2; i++) {
+            if (charArray[i] != 'a') {
+                charArray[i] = 'a';
+                return String.valueOf(charArray);
+            }
+        }
+
+        charArray[n - 1] = 'b';
         return String.valueOf(charArray);
     }
 }

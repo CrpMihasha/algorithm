@@ -4,22 +4,18 @@ import java.util.ArrayList;
 
 public class NodeUtil {
     public static void main(String[] args) {
-//        Node node = generateIntegerNode(5, 10);
-//        printLink(node);
-//        printLink(reverseLinkedList(node));
-
         Node node = generateSortedIntegerNode(10);
         printLink(node);
+//        printLink(reverseLinkedList(node));
+//
+//        Node node = generateSortedIntegerNode(10);
+//        printLink(node);
     }
 
-    /**
-     * 给出一个节点N，左节点left，有节点right， left < right,反转 left -> right
-     */
 
     /**
      * 生成一个顺序链表
      *
-     * @param size 链表大小
      * @param range 元素范围[0,range]
      */
     public static Node generateSortedIntegerNode(Integer range) {
