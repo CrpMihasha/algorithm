@@ -90,7 +90,7 @@ public class SortUtil {
             throw new RuntimeException();
         }
 
-        int len = (int)(Math.random() * maxLen );
+        int len = (int)(Math.random() * maxLen ) + 1;
         int[] ans = new int[len];
         for (int i = 0; i < len; i++) {
             ans[i] = (int)(Math.random() * maxValue);
@@ -107,10 +107,14 @@ public class SortUtil {
             System.out.println("要打印的数组不能为null或者长度为0");
             return;
         }
-
+        System.out.print("{");
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
+            System.out.print(arr[i]);
+            if (i != arr.length - 1) {
+                System.out.print(", ");
+            }
         }
+        System.out.print("}");
         System.out.println();
     }
 
