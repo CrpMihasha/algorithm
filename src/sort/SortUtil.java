@@ -117,6 +117,21 @@ public class SortUtil {
         System.out.print("}");
         System.out.println();
     }
+    public static void printArrInLine(Integer[] arr){
+        if (arr == null || arr.length == 0) {
+            System.out.println("要打印的数组不能为null或者长度为0");
+            return;
+        }
+        System.out.print("{");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i != arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("}");
+        System.out.println();
+    }
 
     /**
      * 打印数组
@@ -143,6 +158,16 @@ public class SortUtil {
      * @param j 要交换位置的索引
      */
     public static void swap(int[] arr, int i, int j) {
+        if (arr == null || i < 0 || j < 0 || i == j) {
+            return;
+        }
+
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void swap(Integer[] arr, int i, int j) {
         if (arr == null || i < 0 || j < 0 || i == j) {
             return;
         }
