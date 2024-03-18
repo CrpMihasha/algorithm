@@ -32,7 +32,7 @@ public class BitDemo {
      *            & 111110010
      *         -------------------
      *              000000010
-     *  有因为：~a+1 = -a
+     *  又因为：~a+1 = -a
      *  故答案可写成： a & (-a)
      */
     public static void findRightOne(int a) {

@@ -12,14 +12,34 @@ import java.util.Random;
 public class MaxHeap {
 
     Integer[] heapArr;
-    Integer heapSize;
+    Integer heapSize; // 当前堆大小
+    Integer limit; // 最大堆元素
+    public void push(int value) {
+        if (heapSize == limit) {
+            throw new RuntimeException("heap is full");
+        }
+        heapArr[heapSize] = value;
+        // value heapSize
+        heapInsert(heapArr, heapSize++);
+    }
+
+
+    // 新加进来的数，现在停在了index位置，请依次往上移动，
+    // 移动到0位置，或者干不掉自己的父亲了，停！
+    private void heapInsert(Integer[] arr, int index) {
+        while (arr[index] > arr[(index - 1) / 2]) {
+            SortUtil.swap(arr, index, (index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+
     /**
      * 插入元素到数组末尾
      * 需要上浮该元素，保持大根堆的性质
      *
      * @param num 插入堆的元素
      */
-    void heapInsert(Integer num){
+    void heapInsert1(Integer num){
         if (heapSize > heapArr.length - 1) {
             System.out.println("堆满了");
             return;
@@ -71,23 +91,8 @@ public class MaxHeap {
      * 在计算机科学中，heapify 是将一个数组或者一个区间变成一个堆的操作，是堆排序和优先队列的基础操作之一。堆化可以分为两种：自上而下的堆化和自下而上的堆化。
      * 判断以当前位置为根节点的元素是否最大，不是则要下沉，跟子节点中较大的元素交换位置
      */
-    void heapify(Integer index){
-        Integer left = index * 2 + 1;
-        Integer right = index * 2 + 2;
-        // 如果没有左子节点，结束
-        if (left > heapSize - 1) {
-            return;
-        }
-        // 如果只有左子节点，该子节点大，交换位置
-        if (right > heapSize - 1 && heapArr[left] > heapArr[index]) {
-            SortUtil.swap(heapArr, index, left);
-        }
-        // 如果左右节点都有，跟较大的交换位置，交换之后继续下沉
-        if (right < heapSize) {
-            Integer largestIndex = heapArr[right] > heapArr[left] ? right : left;
-            SortUtil.swap(heapArr, index, largestIndex);
-            heapify(largestIndex);
-        }
+    void heapify(int index){
+
 
     }
 
@@ -97,6 +102,7 @@ public class MaxHeap {
     public MaxHeap(Integer max){
         heapArr = new Integer[max];
         heapSize = 0;
+        limit = max;
     }
 
     public Integer[] getHeapArr() {
@@ -126,13 +132,15 @@ public class MaxHeap {
 
 class MaxHeapTest{
     public static void main(String[] args) {
-        MaxHeapTest.batchValidate(10,1000);
+//        MaxHeapTest.batchValidate(10,1000);
 //        Integer[] arr = {1, 2, 5, 4, 5, 6, 8, 8, 9, 3};
 //        MaxHeap maxHeap = new MaxHeap(10);
 //        for (Integer i : arr) {
 //            maxHeap.heapInsert(i);
 //        }
 //        System.out.println(maxHeap.toString());
+        int i = -2/2;
+        System.out.println(i);
     }
 
     /**
@@ -147,7 +155,7 @@ class MaxHeapTest{
             MaxHeap maxHeap = new MaxHeap(maxHeapSize);
             for (int j = 0; j < maxHeapSize; j++) {
                 int num = random.nextInt(maxHeapSize);
-                maxHeap.heapInsert(num);
+                maxHeap.push(num);
                 helpArr[j] = num;
             }
             if (!maxHeapValidate(maxHeap)) {
