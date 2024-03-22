@@ -1,4 +1,4 @@
-package leetcode.link;
+package leetcode.array;
 
 import java.util.Arrays;
 
@@ -56,6 +56,7 @@ public class T189 {
      * @param k
      */
     public void rotate1(int[] nums, int k){
+        k = k % nums.length;
         // 一步一步的移动
         for (int i = 0; i < k; i++) {
             int length = nums.length;

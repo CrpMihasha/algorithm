@@ -1,4 +1,4 @@
-package leetcode.link;
+package leetcode.array;
 
 import sort.SortUtil;
 
