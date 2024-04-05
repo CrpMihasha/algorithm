@@ -1,14 +1,75 @@
 package tree;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class TreeUtils<T> {
+    /**
+     * 给定一个二叉树的头节点，判断其是否为二叉搜索树
+     * 根据题意，满足以下条件的二叉树是搜索二叉树
+     * 1、X的左子树是搜索二叉树
+     * 2、X的右子树是搜索二叉树
+     * 3、X的左子树的最大值小于X
+     * 4、X的右子树的最小值大于X
+     */
+    public static boolean isBST(TreeNode head){
+
+    }
+
+    private static BSTInfo bstProcess(TreeNode<Integer> node){
+        // 写递归必须先想base case，就是这个递归什么时候结束
+        if (node == null){
+            return null;
+        }
+        BSTInfo leftInfo = bstProcess(node.left);
+        BSTInfo rightInfo = bstProcess(node.right);
+
+        boolean isBST = true;
+        Integer max = node.value;
+        Integer min = node.value;
+
+        // X的左子树是搜索二叉树,X的右子树是搜索二叉树
+        if (Objects.nonNull(leftInfo) && !leftInfo.isBST){
+            isBST = false;
+        }
+        if (Objects.nonNull(rightInfo) && !rightInfo.isBST){
+            isBST = false;
+        }
+
+        // X的左子树的最大值小于X，X的右子树的最小值大于X
+        if (Objects.nonNull(leftInfo)){
+            max = Math.max(max, leftInfo.max);
+        }
+        if (Objects.nonNull(rightInfo)){
+            min = Math.min(max, rightInfo.min);
+        }
+        if (max >= node.value){
+            isBST = false;
+        }
+        if (min <= node.value){
+            isBST = false;
+        }
+
+        return new BSTInfo(isBST, max, min);
+    }
+
+    static class BSTInfo {
+        boolean isBST;
+        int max;
+        int min;
+
+        public BSTInfo(boolean isBST, int max, int min){
+            this.isBST = isBST;
+            this.max = max;
+            this.min = min;
+        }
+    }
 
     /**
      * 判断一个二叉树是否是平衡树
      * 平衡树的定义： 最大高度和最小高度差<=1
      *
-     * @param x
+     * @param
      * @return
      */
     public static boolean isBalanced(TreeNode head){
