@@ -1,5 +1,6 @@
 package sort;
 
+
 /**
  * @Author Seth
  * @Date 2021/9/7
@@ -7,7 +8,48 @@ package sort;
 public class SortUtil {
     public static void main(String[] args) {
         SortUtil.sortTest(100);
+        int[] arr = {1,2,3,4,5,6,7,0};
+        mergeSort(arr);
     }
+    public static int mergeSort(int[] arr){
+        return mergeSort(arr, 0, arr.length-1, new int[arr.length]);
+    }
+    public static int mergeSort(int[] data, int left, int right, int[] temp) {
+        if(left == right){
+            return 0;
+        }
+        int mid = left + ((right - left) >> 1);
+        int i = mergeSort(data, left, mid, temp);
+        int j = mergeSort(data, mid+1, right, temp);
+        int k = doMerge(data, left, mid, right, temp);
+        return i+j+k;
+    }
+    public static int doMerge(int[] nums, int left, int mid, int right, int[] temp){
+        int rl = left, rr = right, rIndex = mid+1, start = left, ans = 0;
+
+        while(left <= mid && rIndex <= right){
+            if(nums[left] <= nums[rIndex]){
+                temp[start] = nums[left++];
+                start++;
+            } else {
+                temp[start] = nums[rIndex++];
+                ans++;
+                start++;
+            }
+        }
+        while(left <= mid){
+            temp[start++]=nums[left++];
+        }
+        while(rIndex <= right){
+            temp[start++]=nums[rIndex++];
+        }
+        while(rl <= rr){
+            nums[rl] = temp[rl++];
+        }
+
+        return ans;
+    }
+
     /**
      * 验证方法
      */
@@ -15,7 +57,7 @@ public class SortUtil {
         for (int i = 0; i < loopCount; i++) {
             int[] arr = lenRandomValueRandom(20, 100);
 //            Sort.quickSort(arr, 0, arr.length - 1);
-            MergeSort.sort(arr);
+            SortUtil.mergeSort(arr);
             if (!isSorted(arr)) {
                 printArrInLine(arr);
                 System.out.println("出错了");

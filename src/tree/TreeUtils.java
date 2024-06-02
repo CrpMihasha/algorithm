@@ -13,7 +13,7 @@ public class TreeUtils<T> {
      * 4、X的右子树的最小值大于X
      */
     public static boolean isBST(TreeNode head){
-
+        return true;
     }
 
     private static BSTInfo bstProcess(TreeNode<Integer> node){

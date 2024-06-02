@@ -11,6 +11,10 @@ public class Sort {
         SortUtil.sortTest(100);
     }
 
+    public static void mergeSort(int[] arr){
+
+    }
+
     public static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pivotIndex = partition(arr, low, high);
