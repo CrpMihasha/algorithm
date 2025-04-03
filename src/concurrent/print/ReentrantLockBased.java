@@ -83,10 +83,49 @@ public class ReentrantLockBased extends PrintParent{
         even.start();
     }
 
-    /**
-     * use one condition control threads
+   /**
+     * use ReentrantLock control threads
      */
-    public static void  demo2(){
+    public static void demo2() {
+        ReentrantLock lock = new ReentrantLock();
+        Condition oddCondition = lock.newCondition();
+        Condition evenCondition = lock.newCondition();
 
+        Thread odd = new Thread(() -> {
+            while (COUNTER <= MAX) {
+                lock.lock();
+                try {
+                    while (COUNTER % 2 == 0) {
+                        oddCondition.await();
+                    }
+                    if (COUNTER <= MAX){
+                        System.out.println("奇数线程：" + COUNTER++);
+                        evenCondition.signal();
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        });
+        Thread even = new Thread(() -> {
+            while (COUNTER <= MAX) {
+                lock.lock();
+                try {
+                    while (COUNTER % 2 == 1) {
+                        evenCondition.await();
+                    }
+                    System.out.println("偶数线程：" + COUNTER++);
+                    oddCondition.signal();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        });
+        odd.start();
+        even.start();
     }
 }
