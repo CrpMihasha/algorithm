@@ -84,6 +84,7 @@ public class ReentrantLockBased extends PrintParent{
     }
 
    /**
+    *  improved base on wrong_demo
      * use ReentrantLock control threads
      */
     public static void demo2() {
