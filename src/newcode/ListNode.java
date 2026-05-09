@@ -105,6 +105,27 @@ public class ListNode {
         }
         return ans;
     }
+
+    public static ListNode builderFromArr(int[] arr){
+        if(arr == null || arr.length == 0){
+            return null;
+        }
+        ListNode head = new ListNode(arr[0]);
+        ListNode cur = head;
+        for(int i = 1; i < arr.length; i++){
+            ListNode node = new ListNode(arr[i]);
+            cur.next = node;
+            cur = node;
+        }
+        return head;
+    }
+
+    public static void print(ListNode head){
+        while(head != null){
+            System.out.print(head.val + " ");
+            head = head.next;
+        }
+    }
 }
 
 class TComparator implements Comparator<ListNode>{
